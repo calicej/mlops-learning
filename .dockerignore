@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+venv/
+*.log
+*.pt
+*.bin
+*.mp4
+.idea/
+.DS_Store
+.env
