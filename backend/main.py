@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel
 from transformers import pipeline
@@ -5,8 +6,7 @@ from transformers import pipeline
 app = FastAPI()
 clf = pipeline("sentiment-analysis")
 
-# 固定一組 API key（也可以做成環境變數）
-API_KEY = "mysecret"
+API_KEY = os.getenv("API_KEY")  # ✅ 改用環境變數讀取
 
 class InputText(BaseModel):
     text: str

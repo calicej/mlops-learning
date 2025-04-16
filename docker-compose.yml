@@ -8,8 +8,8 @@ services:
     container_name: fastapi-api
     ports:
       - "8000:8000"
-    networks:
-      - mynet
+    env_file:
+      - .env
 
   frontend:
     build:
@@ -20,12 +20,12 @@ services:
       - "7860:7860"
     depends_on:
       - api
-    networks:
-      - mynet
+    env_file:
+      - .env
 
   nginx:
     image: nginx:latest
-    container_name: nginx
+    container_name: nginx-proxy
     ports:
       - "80:80"
     volumes:
@@ -33,9 +33,3 @@ services:
     depends_on:
       - api
       - frontend
-    networks:
-      - mynet
-
-networks:
-  mynet:
-    driver: bridge
