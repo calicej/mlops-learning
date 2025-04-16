@@ -8,3 +8,8 @@ venv/
 .idea/
 .DS_Store
 .env
+
+__pycache__/
+frontend/__pycache__/
+frontend/*.pyc
+
