@@ -1,0 +1,32 @@
+stages:
+  - test
+  - build
+  - deploy
+
+# ✅ Test stage
+unit_test:
+  stage: test
+  image: python:3.10
+  before_script:
+    - pip install -r backend/requirements.txt
+  script:
+    - pytest backend/test_main.py
+
+# 🐳 Build stage
+build_docker_images:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - docker build -t fastapi-api ./backend
+    - docker build -t gradio-ui ./frontend
+
+# 🚀 Deploy stage (placeholder)
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploy step placeholder - customize for your environment"
